@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class App 
-{
+public class App {
 
-    public static void main( String[] args )
-    {
+    public static void main(String[] args) {
         System.out.println("Welcome to the Airport System!\n");
 
         AirTrafficControl trafficControl = new AirTrafficControl();
@@ -31,10 +29,10 @@ public class App
     }
 
     private static List<Runaway> createRunaways(AirTrafficControl trafficControl, GroundService groundService) {
-        List<Runaway> runaways = new ArrayList<Runaway>();
+        List<Runaway> runaways = new ArrayList<>();
 
         for (int i = 1; i < 4; i++) {
-            Runaway runaway = new Runaway("Runaway %d".formatted(i)); 
+            Runaway runaway = new Runaway("Runaway " + i);
             runaways.add(runaway);
         }
         return runaways;
@@ -46,8 +44,8 @@ public class App
         }
     }
 
-    public static int getRandomNumber(int min, int max){
-        return (int) (Math.random() * (max-min));
+    public static int getRandomNumber(int min, int max) {
+        return (int) (Math.random() * (max - min));
     }
 
     private static void performRandomRunawayEvent(List<Runaway> runaways) {

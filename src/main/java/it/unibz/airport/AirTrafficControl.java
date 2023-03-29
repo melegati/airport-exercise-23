@@ -3,7 +3,7 @@ package it.unibz.airport;
 public class AirTrafficControl {
 
     public String findAvailableRunaway(){
-        
+
         return null;
     }
 
@@ -14,7 +14,7 @@ public class AirTrafficControl {
             System.out.println("AIR TRAFFIC CONTROL: no runaways available!");
         }
         else {
-            System.out.println("AIR TRAFFIC CONTROL: next available runaway %s".formatted(availableRunaway));
+            System.out.printf("AIR TRAFFIC CONTROL: next available runaway %s%n", availableRunaway);
         }
     }
 

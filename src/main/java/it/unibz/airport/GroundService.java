@@ -9,7 +9,7 @@ public class GroundService {
     }
     
     public void displayMessage() {
-        System.out.println("GROUND SERVICE: Number of free runaways: %d".formatted(getNumberOfAvailableRunaways()));
+        System.out.printf("GROUND SERVICE: Number of free runaways: %d%n", getNumberOfAvailableRunaways());
     }
 
 }
