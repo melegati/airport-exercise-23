@@ -1,15 +1,18 @@
 package it.unibz.airport;
 
-public class GroundService {
+import java.util.List;
+
+public class GroundService implements ServiceSubsriber {
 
     private int numberOfAvailableRunaways = 0;
 
-    public int getNumberOfAvailableRunaways() {
-        return numberOfAvailableRunaways;
-    }
-    
+
     public void displayMessage() {
-        System.out.println("GROUND SERVICE: Number of free runaways: %d".formatted(getNumberOfAvailableRunaways()));
+        System.out.printf("GROUND SERVICE: Number of free runaways: %d%n", numberOfAvailableRunaways);
     }
 
+    @Override
+    public void update(List<Runaway> runaways) {
+        numberOfAvailableRunaways = (int) runaways.stream().filter(Runaway::isClear).count();
+    }
 }

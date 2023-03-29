@@ -1,21 +1,22 @@
 package it.unibz.airport;
 
-public class AirTrafficControl {
+import java.util.List;
+import java.util.Optional;
 
-    public String findAvailableRunaway(){
-        
-        return null;
-    }
+public class AirTrafficControl implements ServiceSubsriber {
+
+    private Optional<Runaway> availableRunaway = Optional.empty();
 
     public void displayMessage() {
-
-        String availableRunaway = findAvailableRunaway();
-        if(availableRunaway == null) {
+        if (availableRunaway.isEmpty()) {
             System.out.println("AIR TRAFFIC CONTROL: no runaways available!");
+            return;
         }
-        else {
-            System.out.println("AIR TRAFFIC CONTROL: next available runaway %s".formatted(availableRunaway));
-        }
+        System.out.printf("AIR TRAFFIC CONTROL: next available runaway %s%n", availableRunaway.get().getName());
     }
 
+    @Override
+    public void update(List<Runaway> runaways) {
+        availableRunaway = runaways.stream().filter(Runaway::isClear).findFirst();
+    }
 }
