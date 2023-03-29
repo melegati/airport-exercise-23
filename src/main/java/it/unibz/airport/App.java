@@ -11,48 +11,17 @@ public class App {
 
         AirTrafficControl trafficControl = new AirTrafficControl();
         GroundService groundService = new GroundService();
-        List<Runaway> runaways = createRunaways(trafficControl, groundService);
 
-        startRunaways(runaways);
-
-        groundService.displayMessage();
-        trafficControl.displayMessage();
-        System.out.println("\n");
+        RunawayPublisher publisher = new RunawayPublisher();
+        publisher.addSubscriber(trafficControl);
+        publisher.addSubscriber(groundService);
+        publisher.publish();
+        publisher.showMessages();
 
         for (int i = 0; i < 10; i++) {
-            performRandomRunawayEvent(runaways);
-            groundService.displayMessage();
-            trafficControl.displayMessage();
+            publisher.performRandomRunawayEvent();
+            publisher.showMessages();
             System.out.println();
         }
-
     }
-
-    private static List<Runaway> createRunaways(AirTrafficControl trafficControl, GroundService groundService) {
-        List<Runaway> runaways = new ArrayList<>();
-
-        for (int i = 1; i < 4; i++) {
-            Runaway runaway = new Runaway("Runaway " + i);
-            runaways.add(runaway);
-        }
-        return runaways;
-    }
-
-    private static void startRunaways(List<Runaway> runaways) {
-        for (Runaway runaway : runaways) {
-            runaway.setClear(true);
-        }
-    }
-
-    public static int getRandomNumber(int min, int max) {
-        return (int) (Math.random() * (max - min));
-    }
-
-    private static void performRandomRunawayEvent(List<Runaway> runaways) {
-        int changingRunawayIndex = getRandomNumber(0, 2);
-        Runaway runaway = runaways.get(changingRunawayIndex);
-        System.out.println("Changing " + runaway.getName());
-        runaway.setClear(!runaway.isClear());
-    }
-
 }
